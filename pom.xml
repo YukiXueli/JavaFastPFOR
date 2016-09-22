@@ -134,6 +134,7 @@
          <excludes>
             <exclude>com/kamikaze/pfordelta/*</exclude>
             <exclude>me/lemire/integercompression/benchmarktools/*</exclude>
+            <exclude>../../test/java/*</exclude>
          </excludes>
        </configuration>
         <executions>
