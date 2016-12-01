@@ -22,12 +22,38 @@ public class XueAddBasicTest {
      */
     @Test
     public void consistentTest() {
-        int N = 4096;
-        int[] data = new int[N];
+        int bitLength[] = { 1, 2, 3, 4, 5, 7, 9, 14, 28 };
+        int codeNum[] = { 28, 14, 9, 7, 5, 4, 3, 2, 1 };
+        for(int s1 = 0 ; s1 < 9; ++s1){
+            for(int s2 = 0; s2 < 9; ++s2){
+                int max1 = 1 << bitLength[s1];
+                int max2 = 1 << bitLength[s2];
+                int num1 = codeNum[s1];
+                int num2 = codeNum[s2];
+
+                int N = num1 + num2;
+                int[] data = new int[N];
+
+                int i = 0;
+                for(; i < num1; ++i){
+                    data[i] = max1 - 1;
+                }
+                for(; i < num1 + num2; ++i){
+                    data[i] = max2 - 1;
+                }
+
+                oneTest(N, data);
+
+            }
+        }
+
+
+    }
+    private void oneTest(int N, int[] data){
         int[] rev = new int[N];
-        for (int mod = 1; mod <= 81; ++mod){
-        for (int k = 0; k < N; ++k)
-            data[k] = k % mod;
+
+        //for (int k = 0; k < N; ++k)
+        //    data[k] = k % 128;
         for (SkippableIntegerCODEC c : codecs) {
             System.out.println("[SkippeableBasicTest.consistentTest] codec = "
                     + c);
@@ -53,9 +79,7 @@ public class XueAddBasicTest {
                     }
             }
         }
-        }
     }
-
     
     /**
      * 
