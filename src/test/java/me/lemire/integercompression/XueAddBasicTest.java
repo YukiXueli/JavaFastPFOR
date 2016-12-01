@@ -22,11 +22,11 @@ public class XueAddBasicTest {
      */
     @Test
     public void consistentTest() {
-        int N = 100;
+        int N = 4096;
         int[] data = new int[N];
         int[] rev = new int[N];
         for (int k = 0; k < N; ++k)
-            data[k] = k % 128;
+            data[k] = k % 100;
         for (SkippableIntegerCODEC c : codecs) {
             System.out.println("[SkippeableBasicTest.consistentTest] codec = "
                     + c);
