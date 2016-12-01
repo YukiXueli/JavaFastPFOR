@@ -22,7 +22,7 @@ public class XueAddBasicTest {
      */
     @Test
     public void consistentTest() {
-        int N = 4096;
+        int N = 100;
         int[] data = new int[N];
         int[] rev = new int[N];
         for (int k = 0; k < N; ++k)
