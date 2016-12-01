@@ -25,8 +25,9 @@ public class XueAddBasicTest {
         int N = 4096;
         int[] data = new int[N];
         int[] rev = new int[N];
+        for (int mod = 1; mod <= 81; ++mod){
         for (int k = 0; k < N; ++k)
-            data[k] = k % 100;
+            data[k] = k % mod;
         for (SkippableIntegerCODEC c : codecs) {
             System.out.println("[SkippeableBasicTest.consistentTest] codec = "
                     + c);
@@ -51,6 +52,7 @@ public class XueAddBasicTest {
                         throw new RuntimeException("bug");
                     }
             }
+        }
         }
     }
 
