@@ -39,16 +39,17 @@ public class Xue_DeltaTest {
     @Test
     public void deltaWithInitialTest() {
         int[] data = new int[1024]; //0 1 2 3 4 5 6 7 8 9 10 ... => 0 1 2 -5 1 1 1 1 8 9 10, return 7
-        int start = 3, length = 5, init = 8;
+
+        int start = 3, length = 5, init;
+        int[] out = new int[length];
 
         for (int k = 0; k < 1024; ++k) data[k] = k;
+        init = data[start - 1];
 
-        Delta.delta(data, start, length, init);
+        Delta.delta(data, start, length, init, out);
 
-        for (int k = 0; k < 1024; ++k){
-            if(k == start) assertEquals("deltaWithInitialTest", data[k], start - init);
-            else if(k > start && k < start + length) assertEquals("deltaWithInitialTest", data[k], 1);
-            else assertEquals("deltaWithInitialTest", data[k], k);
+        for (int k = 0; k < length; ++k){
+            assertEquals("deltaWithInitialTest", out[k], 1);
         }
     }
 
@@ -82,16 +83,13 @@ public class Xue_DeltaTest {
 
     @Test
     public void fastinverseDeltaWithInitialTest(){
-        int[] data = new int[1024]; //0 1 2 3 4 5 6 7 8 9 10 ... => 0 1 2 -5 1 1 1 1 8 9 10, return 7
-        int start = 3, length = 5, init = 8;
+        int[] data = {0, 1, 2, 1, 1, 1, 1, 1, 8, 9}; //0 1 2 3 4 5 6 7 8 9 10 ... => 0 1 2 -5 1 1 1 1 8 9 10, return 7
+        int start = 3, length = 5, init = 2;
 
-        for (int k = 0; k < 1024; ++k) data[k] = k;
-
-        int newInit = Delta.delta(data, start, length, init);
         Delta.fastinverseDelta(data, start, length, init);
 
-        for (int k = 0; k < 1024; ++k){
-            assertEquals("inverseDeltaTest", data[k], k);
+        for (int k = 0; k < length; ++k){
+            assertEquals("fastinverseDeltaWithInitialTest", data[k], k);
         }
     }
 }
