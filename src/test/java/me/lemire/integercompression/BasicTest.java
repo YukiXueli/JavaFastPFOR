@@ -245,10 +245,15 @@ public class BasicTest {
         int[] data = new int[N];
         int[] compressed = new int[N];
         int[] uncompressed = new int[N];
-        for (int bit = 0; bit < 31; ++bit) {
+        for (int bit = 0; bit < 32; ++bit) {//Xue
             for (int t = 0; t < TIMES; ++t) {
                 for (int k = 0; k < N; ++k) {
-                    data[k] = r.nextInt(1 << bit);
+                    if(bit == 31){
+                        data[k] = r.nextInt(1 << 30);
+                    }
+                    else {
+                        data[k] = r.nextInt(1 << bit);
+                    }
                 }
                 BitPacking.fastpack(data, 0, compressed, 0, bit);
                 BitPacking.fastunpack(compressed, 0, uncompressed, 0, bit);
@@ -268,10 +273,15 @@ public class BasicTest {
         int[] data = new int[N];
         int[] compressed = new int[N];
         int[] uncompressed = new int[N];
-        for (int bit = 0; bit < 31; ++bit) {
+        for (int bit = 0; bit < 32; ++bit) {//Xue
             for (int t = 0; t < TIMES; ++t) {
                 for (int k = 0; k < N; ++k) {
-                    data[k] = r.nextInt(1 << bit);
+                    if(bit == 31){
+                        data[k] = r.nextInt(1 << 30);
+                    }
+                    else {
+                        data[k] = r.nextInt(1 << bit);
+                    }
                 }
                 BitPacking.fastpackwithoutmask(data, 0, compressed, 0, bit);
                 BitPacking.fastunpack(compressed, 0, uncompressed, 0, bit);
