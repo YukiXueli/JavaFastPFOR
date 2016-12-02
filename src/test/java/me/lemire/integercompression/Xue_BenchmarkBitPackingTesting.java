@@ -10,6 +10,7 @@ import me.lemire.integercompression.BitPacking;
 import me.lemire.integercompression.differential.Delta;
 import me.lemire.integercompression.differential.IntegratedBitPacking;
 
+import org.junit.Test;
 import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.Random;
@@ -17,12 +18,16 @@ import java.util.Random;
 /**
  * Class used to benchmark the speed of bit packing. (For expert use.)
  * 
- * @author Daniel Lemire
+ * @author Xue Li
  * 
  */
 public class Xue_BenchmarkBitPackingTesting {
-
-        private static void test(boolean verbose) {
+        @Test
+        public void test(){
+                testCore(true);
+                testCore(false);
+        }
+        private void testCore(boolean verbose) {
                 DecimalFormat dfspeed = new DecimalFormat("0");
                 final int N = 32;
                 final int times = 100000;
@@ -66,8 +71,12 @@ public class Xue_BenchmarkBitPackingTesting {
                                                 / (decomp)));
                 }
         }
-
-        private static void testWithDeltas(boolean verbose) {
+        @Test
+        public void testWithDeltas(){
+                testWithDeltasCore(false);
+                testWithDeltasCore(true);
+        }
+        private void testWithDeltasCore(boolean verbose) {
                 DecimalFormat dfspeed = new DecimalFormat("0");
                 final int N = 32;
                 final int times = 100000;
@@ -104,6 +113,9 @@ public class Xue_BenchmarkBitPackingTesting {
                                 decomp += time3 - time2;
                                 tmpdata = Arrays.copyOf(data, data.length);
                                 time1 = System.nanoTime();
+                                if(bit == 26){
+                                        int tttt = 0;
+                                }
                                 IntegratedBitPacking.integratedpack(0, tmpdata,
                                         0, icompressed, 0, bit);
                                 time2 = System.nanoTime();
@@ -142,6 +154,7 @@ public class Xue_BenchmarkBitPackingTesting {
          * @param args
          *                command-line arguments
          */
+        /*
         public static void main(String[] args) {
                 System.out.println("Testing packing and delta ");
                 testWithDeltas(false);
@@ -150,5 +163,6 @@ public class Xue_BenchmarkBitPackingTesting {
                 test(false);
                 test(true);
         }
+        */
 
 }
