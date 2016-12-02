@@ -32,13 +32,14 @@ public class XueAddBasicTest {
                 int num2 = codeNum[s2];
 
                 int N = num1 + num2;
+                if(N < 57) N = 57;
                 int[] data = new int[N];
 
                 int i = 0;
                 for(; i < num1; ++i){
                     data[i] = max1 - 1;
                 }
-                for(; i < num1 + num2; ++i){
+                for(; i < N; ++i){
                     data[i] = max2 - 1;
                 }
 
