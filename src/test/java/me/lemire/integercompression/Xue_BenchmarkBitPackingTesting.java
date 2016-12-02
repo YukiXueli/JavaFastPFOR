@@ -30,13 +30,13 @@ public class Xue_BenchmarkBitPackingTesting {
                 int[] data = new int[N];
                 int[] compressed = new int[N];
                 int[] uncompressed = new int[N];
-                for (int bit = 0; bit < 31; ++bit) {
+                for (int bit = 0; bit < 32; ++bit) {
                         long comp = 0;
                         long compwm = 0;
                         long decomp = 0;
                         for (int t = 0; t < times; ++t) {
                                 for (int k = 0; k < N; ++k) {
-                                        data[k] = r.nextInt(1 << bit);
+                                        data[k] = r.nextInt(1 << (bit == 31 ? 30 : bit));
                                 }
                                 long time1 = System.nanoTime();
                                 BitPacking
