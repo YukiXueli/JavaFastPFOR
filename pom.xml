@@ -132,8 +132,6 @@
         <version>0.7.6.201602180812</version>
         <configuration>
          <excludes>
-            <exclude>com/kamikaze/pfordelta/*</exclude>
-            <exclude>me/lemire/integercompression/benchmarktools/*</exclude>
             <exclude>../../../test/java/*</exclude>
          </excludes>
        </configuration>
