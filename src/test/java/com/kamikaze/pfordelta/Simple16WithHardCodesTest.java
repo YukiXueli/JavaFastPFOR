@@ -29,6 +29,7 @@ public class Simple16WithHardCodesTest {
 
 
         for(int i = 0; i < 17; ++i){
+            i = i << 28;
 
             sm.s16DecompressWithIntBufferBackup(output, 0, i, 0);
 
