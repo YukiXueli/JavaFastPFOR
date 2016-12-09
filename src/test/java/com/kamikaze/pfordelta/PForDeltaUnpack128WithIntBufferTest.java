@@ -12,7 +12,7 @@ import java.nio.IntBuffer;
 public class PForDeltaUnpack128WithIntBufferTest {
     PForDeltaUnpack128WIthIntBuffer sm = new PForDeltaUnpack128WIthIntBuffer();
 
-    byte[] buf = new byte[16384];
+    byte[] buf = new byte[4096];
     ByteBuffer bufWrap = ByteBuffer.wrap(buf);
 
     IntBuffer ibuf = bufWrap.asIntBuffer();
