@@ -1,31 +1,19 @@
 package me.lemire.integercompression;
 
-import java.util.Arrays;
-
 import org.junit.Test;
+
+import java.util.Arrays;
 
 
 /**
- * Just some basic sanity tests.
+ * Tests for class GroupSimple9.
  * 
- * @author Daniel Lemire
+ * @author Xue Li
  */
 @SuppressWarnings({ "static-method" })
-public class SkippableBasicTest {
+public class GroupSimpleTest {
     SkippableIntegerCODEC[] codecs = {
-            new JustCopy(),
-            new VariableByte(),
-            new SkippableComposition(new BinaryPacking(), new VariableByte()),
-            new SkippableComposition(new NewPFD(), new VariableByte()),
-            new SkippableComposition(new NewPFDS9(), new VariableByte()),
-            new SkippableComposition(new NewPFDS16(), new VariableByte()),
-            new SkippableComposition(new OptPFD(), new VariableByte()),
-            new SkippableComposition(new OptPFDS9(), new VariableByte()),
-            new SkippableComposition(new OptPFDS16(), new VariableByte()),
-            new SkippableComposition(new FastPFOR128(), new VariableByte()),
-            new SkippableComposition(new FastPFOR(), new VariableByte()),
-            new Simple9(),
-            new Simple16()
+            new GroupSimple9()
     };
 
     
@@ -34,11 +22,39 @@ public class SkippableBasicTest {
      */
     @Test
     public void consistentTest() {
-        int N = 4096;
-        int[] data = new int[N];
+        int bitLength[] = { 1, 2, 3, 4, 5, 7, 9, 14, 28 };
+        int codeNum[] = { 28, 14, 9, 7, 5, 4, 3, 2, 1 };
+        for(int s1 = 0 ; s1 < 9; ++s1){
+            for(int s2 = 0; s2 < 9; ++s2){
+                int max1 = 1 << bitLength[s1];
+                int max2 = 1 << bitLength[s2];
+                int num1 = codeNum[s1];
+                int num2 = codeNum[s2];
+
+                int N = num1 + num2;
+                if(N < 57) N = 57;
+                int[] data = new int[N];
+
+                int i = 0;
+                for(; i < num1; ++i){
+                    data[i] = max1 - 1;
+                }
+                for(; i < N; ++i){
+                    data[i] = max2 - 1;
+                }
+
+                oneTest(N, data);
+
+            }
+        }
+
+
+    }
+    private void oneTest(int N, int[] data){
         int[] rev = new int[N];
-        for (int k = 0; k < N; ++k)
-            data[k] = k % 128;
+
+        //for (int k = 0; k < N; ++k)
+        //    data[k] = k % 128;
         for (SkippableIntegerCODEC c : codecs) {
             System.out.println("[SkippeableBasicTest.consistentTest] codec = "
                     + c);
@@ -65,7 +81,6 @@ public class SkippableBasicTest {
             }
         }
     }
-
     
     /**
      * 
@@ -99,7 +114,9 @@ public class SkippableBasicTest {
     /**
      * 
      */
+    /*
     @Test
+
     public void varyingLengthTest2() {
         int N = 128;
         int[] data = new int[N];
@@ -141,5 +158,5 @@ public class SkippableBasicTest {
         }
     }
 
-
+    */
 }

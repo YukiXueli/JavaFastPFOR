@@ -20,11 +20,6 @@ import static org.junit.Assert.*;
 public final class XorBinaryPackingTest
 {
 
-
-
-
-
-
     private static void checkCompressAndUncompress(String label, int[] data) {
         XorBinaryPacking codec = new XorBinaryPacking();
         int[] compBuf = TestUtils.compress(codec, data);
