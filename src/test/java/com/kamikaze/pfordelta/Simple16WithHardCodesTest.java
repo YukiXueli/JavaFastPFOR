@@ -24,21 +24,31 @@ public class Simple16WithHardCodesTest {
 
         assertEquals(sm.s16Decompress(output, 0, input, 0, 1024), 28);
 
-        assertEquals(sm.s16DecompressWithIntBufferBackup(output, 0, 22, 1024), 28);
 
-        assertEquals(sm.s16DecompressWithIntBuffer(output, 0, 22, 1024), 28);
 
-        assertEquals(sm.s16DecompressWithIntBufferWithHardCodes(output, 0, 22, 1024), 28);
 
-        assertEquals(sm.s16DecompressWithIntBufferIntegrated(output, 0, 22, 1024, input, 8), 28);
 
-        assertEquals(sm.s16DecompressWithIntBufferIntegrated2(output, 0, 22, 1024, input, 8), 28);
+        for(int i = 0; i < 17; ++i){
 
-        assertEquals(sm.s16DecompressWithIntBufferIntegratedBackup(output, 0, 22, 1024, input, 8), 28);
+            sm.s16DecompressWithIntBufferBackup(output, 0, i, 0);
 
-        assertEquals(sm.s16DecompressOneNumberWithHardCodes(output, 0, 22, 0), 28);
+            sm.s16DecompressWithIntBuffer(output, 0, i, 0);
 
-        assertEquals(sm.s16DecompressOneNumberWithHardCodesIntegrated(output, 0, 22, 0, 8, input), 28);
+            sm.s16DecompressWithIntBufferWithHardCodes(output, 0, i, 0);
+
+            sm.s16DecompressWithIntBufferIntegrated(output, 0, i, 0, input, 8);
+
+
+            sm.s16DecompressWithIntBufferIntegrated2(output, 0, i, 0, input, 8);
+
+            sm.s16DecompressWithIntBufferIntegratedBackup(output, 0, i, 0, input, 8);
+
+            sm.s16DecompressOneNumberWithHardCodes(output, 0, i, 0);
+
+            sm.s16DecompressOneNumberWithHardCodesIntegrated(output, 0, i, 0, 8, input);
+        }
+
+
 
     }
 }
